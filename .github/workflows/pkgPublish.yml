@@ -27,8 +27,7 @@ jobs:
         with:
           node-version: 12
           registry-url: https://npm.pkg.github.com/
-          scope: '@sgomatam'
       - run: npm ci
-      - run: npm publish
+      - run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{secrets.my_git_token}}
