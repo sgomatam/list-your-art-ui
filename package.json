@@ -1,6 +1,6 @@
 {
-  "name": "list-your-art",
-  "version": "1.7.0",
+  "name": "@sgomatam/list-your-art",
+  "version": "1.8.0",
   "private": false,
   "publishConfig": { 
     "registry": "https://npm.pkg.github.com/" 
