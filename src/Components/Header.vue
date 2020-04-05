@@ -11,7 +11,7 @@
       </div>
       <!--Logo-->
       <router-link to="/">
-        <a class="navbar-brand py-0 pl-5">
+        <a class="navbar-brand py-0 pl-4">
             <img src="@/assets/logo.png">
         </a>
       </router-link>
@@ -90,7 +90,12 @@ nav {
 }
 .navbar {
   border-bottom: 1px solid #DCDCDC;
-  background-color: #F8F8F8;
+  background-color: #ffffff;
+}
+
+.navbar-brand img {
+  height: 50px;
+  width: 200px;
 }
 
 .close {
@@ -116,7 +121,7 @@ nav {
 .search {
   outline: none;
   border: 1px #F8F8F8;
-  background: #ededed url('../assets/search.png') no-repeat 5px center;
+  background: #FFFFFF url('../assets/search.png') no-repeat 5px center;
   padding: 5px 8px 0px 26px;
   width: 10px;
   -webkit-border-radius: 10em;
@@ -174,7 +179,6 @@ form .btn-xl.btn-success.mt-3 {
 }
 
 .user{
-  margin-right: 10px;
   padding-top: 5px;
 }
 

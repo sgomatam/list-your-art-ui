@@ -2,8 +2,8 @@
   <div class="container grid">
     <div class="row justify-content-around">
       <div class="row justify-content-center">
-        <div class="row col-xl-9 col-lg-9 col-md-12 col-sm-12 col-xs-12 text-center">
-          <div v-if="this.cards == 0" class="col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+          <div v-if="this.cards == 0" class="col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-6">
             <h4 style="margin-left:9rem;margin-right:9rem">Sorry, we can't find an art with this feature</h4>
           </div>
 

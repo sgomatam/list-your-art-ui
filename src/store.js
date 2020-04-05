@@ -34,6 +34,14 @@ export default new Vuex.Store({
         comments: 0
       },
       {
+        id: 1,
+        artName: "my best art",
+        authorName: "Srikanth",
+        artURL: "/api/file/ash1.jpg",
+        likes: 0,
+        comments: 0
+      },
+      {
         id: 4,
         artName: "my 4th art",
         authorName: "Srikanth",
@@ -70,6 +78,14 @@ export default new Vuex.Store({
         artName: "my 8th art",
         authorName: "Srikanth",
         artURL: "/api/file/IMG_5274_sRGB.jpg",
+        likes: 0,
+        comments: 0
+      },
+      {
+        id: 2,
+        artName: "my last art",
+        authorName: "Srikanth",
+        artURL: "/api/file/ash2.jpg",
         likes: 0,
         comments: 0
       }

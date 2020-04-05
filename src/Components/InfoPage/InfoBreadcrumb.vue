@@ -28,7 +28,7 @@ export default {
 .breadcrumb>li>a {
   text-decoration: none;
   color: #2c3539 !important;
-  font-size: 18px;
+  font-size: 16px;
 }
 .breadcrumb>li>a:hover {
   text-decoration: underline;
@@ -36,6 +36,6 @@ export default {
 
 .breadcrumb-item.active {
   text-decoration: none !important;
-  color: #f2be00 !important;
+  color: #c16666 !important;
 }
 </style>

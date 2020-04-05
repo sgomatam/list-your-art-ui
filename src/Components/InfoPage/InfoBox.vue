@@ -6,10 +6,10 @@
       </div>
 
       <div class="col6 col-xl-6 col-lg-6 col-md-12 col-sm-12 d-flex align-items-center justify-content-start">
-        <div class="info pt-xl-0 pt-lg-0 pt-5">
+        <div class="info pt-xl-4 pt-lg-0 pt-5">
           <span class="float-left pr-3">★★★★★</span><h6 style="width:190px;">{{ it.likes }} reviews</h6>
           <h1 class="font-weight-bold text-uppercase pt-3">{{ it.artName }}</h1>
-          <br><br><br>
+          <br>
           <button class="add-to-cart-button" @click="addtoCart(it, it.id)">ADD TO CART</button>
         </div>
       </div>

@@ -1,17 +1,17 @@
 <template>
   <div>
-    <Carousel />
+    <Imagery />
     <AboutUs />
   </div>
 </template>
 
 <script>
-import Carousel from '@/Components/HomePage/Carousel.vue'
+import Imagery from '@/Components/HomePage/Imagery.vue'
 import AboutUs from '@/Components/HomePage/AboutUs.vue'
 
 export default {
   components: {
-    Carousel, AboutUs
+    Imagery, AboutUs
   }
 }
 

@@ -44,7 +44,7 @@ export default {
       return this.$store.state.items
     },
     sliceRelatedItems(){
-      return this.relatedItems.slice(0 ,3)
+      return this.relatedItems.slice(0 ,4)
     }
   },
   methods: {
@@ -61,8 +61,6 @@ width: 50px;
 border-bottom: 1px solid black;
 }
 .related-item{
-  padding-left: 8rem;
-  padding-right: 8rem;
   height: auto;
   text-align: center;
 }
