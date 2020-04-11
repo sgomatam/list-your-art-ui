@@ -1,7 +1,8 @@
 <template>
-  <div>
+  <div id="home-page">
+
     <Imagery />
-    <AboutUs />
+
   </div>
 </template>
 
@@ -16,3 +17,7 @@ export default {
 }
 
 </script>
+
+<style scoped>
+  
+</style>

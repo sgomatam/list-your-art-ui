@@ -1,5 +1,5 @@
 <template>
-  <div class="container-flex">
+  <div class="container-flex header">
     <nav class="navbar navbar-light">
       <div class="dropdown d-xl-none d-lg-none mr-auto">
         <img src="@/assets/menu.png" data-toggle="dropdown" data-target="#navd" aria-haspopup="true" aria-expanded="false">
@@ -85,6 +85,11 @@ export default {
 </script>
 
 <style>
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 999999;
+}
 nav {
   z-index:100;
 }
