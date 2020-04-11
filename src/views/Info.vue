@@ -8,7 +8,7 @@
     <div class="related-item">
       <hr>
       <h6 class="pb-4">RELATED ARTS</h6>
-      <Art :CardArray="sliceRelatedItems" />
+      <Art :CardArray="relatedItems" />
     </div>
 
   </div>
@@ -28,28 +28,36 @@ export default {
   },
   data() {
     return {
-      information: [],
+      information: {},
       relatedItems: []
     }
   },
   created(){
-    this.information = this.infO
-    this.relatedItems = this.bringItems
-    },
+    this.information = this.$store.state.items[this.artId]
+    this.relatedItems = this.sliceRelatedItems
+  },
   computed: {
-    infO() {
-      return this.$store.getters.infoLength
-    },
-    bringItems() {
-      return this.$store.state.items
+    artId() {
+      return this.$route.params.artId - 1
     },
     sliceRelatedItems(){
-      return this.relatedItems.slice(0 ,4)
+      let MAX_NUMBER_RELATED_ITEMS = 4;
+      let artsArray = []
+      let temp = []
+
+      while(artsArray.length < MAX_NUMBER_RELATED_ITEMS) {
+        let randomNumber = Math.floor( Math.random() * 10 )
+        if(temp.indexOf(randomNumber) === -1) {
+          temp.push(randomNumber)
+          artsArray.push(this.$store.state.items[randomNumber])
+        }
+      }
+      return this.relatedItems = artsArray
     }
   },
-  methods: {
-    sendInfo(it, id) {
-     this.$store.commit('addtoInfo', it, id)
+  watch: {
+    '$route.params.artId': function(artId){
+      this.information = this.$store.state.items[this.artId]
     }
   }
 }
@@ -57,8 +65,8 @@ export default {
 
 <style scoped>
 hr {
-width: 50px;
-border-bottom: 1px solid black;
+  width: 50px;
+  border-bottom: 1px solid black;
 }
 .related-item{
   height: auto;

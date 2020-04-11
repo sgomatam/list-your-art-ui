@@ -5,11 +5,11 @@
           <div class="card">
             <img class="card-img-top" :src="'http://listyourart-stage.us-east-2.elasticbeanstalk.com'+item.artURL" alt="Card image cap">
             <div class="overlay">
-              <router-link to="/Info"><button type="button" class="btn btn-outline-secondary btn-lg" @click="sendInfo(item)">Info</button></router-link>
+              <router-link :to="'/Info/'+ item.id"><button type="button" class="btn btn-outline-secondary btn-lg" @click="scrollToTop()">Info</button></router-link>
             </div>
             <div class="card-body">
               <h5 class="card-title">{{ item.artName }}</h5>
-              <p class="card-text">${{ item.authorName }}</p>
+              <p class="card-text">{{ item.authorName }}</p>
             </div>
           </div>
       </div>
@@ -23,8 +23,11 @@ export default {
   props: ['CardArray'],
   name: 'Art',
   methods: {
-    sendInfo(it) {
-     this.$store.commit('addtoInfo', it)
+    scrollToTop() {
+      // For Safari
+      document.body.scrollTop = 0; 
+      // For Chrome, Firefox, IE and Opera
+      document.documentElement.scrollTop = 0; 
     }
   }
 }
@@ -75,7 +78,7 @@ export default {
 }
 
 .card:hover, .card:active {
-  transform: scaleY(1.1) scaleX(1.06);
+  transform: scaleY(1.0) scaleX(1.00);
   box-shadow: 0 14px 98px rgba(0, 0, 0, 0.25), 0 0px 60px rgba(0, 0, 0, 0.22);
 }
 </style>

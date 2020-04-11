@@ -16,79 +16,79 @@ export default new Vuex.Store({
         artURL: "/api/file/IMG_4442.jpg",
         likes: 0,
         comments: 0
-        },
-        {
+      },
+      {
         id: 2,
         artName: "my 2nd art",
         authorName: "Srikanth",
         artURL: "/api/file/IMG_4296.jpg",
         likes: 0,
         comments: 0
-        },
-        {
+      },
+      {
         id: 3,
         artName: "my 3rd art",
         authorName: "Srikanth",
         artURL: "/api/file/IMG_4271.jpg",
         likes: 0,
         comments: 0
-        },
-        {
+      },
+      {
         id: 4,
         artName: "my 4th art",
         authorName: "Srikanth",
         artURL: "/api/file/FullSizeRender14.jpg",
         likes: 0,
         comments: 0
-        },
-        {
+      },
+      {
         id: 5,
         artName: "my 5th art",
         authorName: "Srikanth",
         artURL: "/api/file/IMG_4252.jpg",
         likes: 0,
         comments: 0
-        },
-        {
+      },
+      {
         id: 6,
         artName: "my 6th art",
         authorName: "Srikanth",
         artURL: "/api/file/IMG_4167.jpg",
         likes: 0,
         comments: 0
-        },
-        {
+      },
+      {
         id: 7,
         artName: "my 7th art",
         authorName: "Srikanth",
         artURL: "/api/file/IMG_5142.jpg",
         likes: 0,
         comments: 0
-        },
-        {
+      },
+      {
         id: 8,
         artName: "my 8th art",
         authorName: "Srikanth",
         artURL: "/api/file/FullSizeRender5.jpg",
         likes: 0,
         comments: 0
-        },
-        {
+      },
+      {
         id: 9,
         artName: "my 9th art",
         authorName: "Srikanth",
         artURL: "/api/file/IMG_5274_sRGB.jpg",
         likes: 0,
         comments: 0
-        },
-        {
+      },
+      {
         id: 10,
         artName: "my 10th art",
         authorName: "Srikanth",
         artURL: "/api/file/IMG_5219.jpg",
         likes: 0,
         comments: 0
-        }
+      }
     ]
   },
   // plugins: [createPersistedState()],

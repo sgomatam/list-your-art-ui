@@ -1,16 +1,16 @@
 <template>
   <div>
-    <div class="row mb-5" v-for="it in information" :key="it.id">
+    <div class="row mb-5">
       <div class="col6 col-xl-6 col-lg-6 col-md-12 col-sm-12">
-        <img class="img-fluid" :src="'http://listyourart-stage.us-east-2.elasticbeanstalk.com'+it.artURL">
+        <img class="img-fluid" :src="'http://listyourart-stage.us-east-2.elasticbeanstalk.com'+information.artURL">
       </div>
 
       <div class="col6 col-xl-6 col-lg-6 col-md-12 col-sm-12 d-flex align-items-center justify-content-start">
         <div class="info pt-xl-4 pt-lg-0 pt-5">
-          <span class="float-left pr-3">★★★★★</span><h6 style="width:190px;">{{ it.likes }} reviews</h6>
-          <h1 class="font-weight-bold text-uppercase pt-3">{{ it.artName }}</h1>
+          <span class="float-left pr-3">★★★★★</span><h6 style="width:190px;">{{ information.likes }} reviews</h6>
+          <h1 class="font-weight-bold text-uppercase pt-3">{{ information.artName }}</h1>
           <br>
-          <button class="add-to-cart-button" @click="addtoCart(it, it.id)">ADD TO CART</button>
+          <button class="add-to-cart-button" @click="addtoCart(information, information.id)">ADD TO CART</button>
         </div>
       </div>
     </div>

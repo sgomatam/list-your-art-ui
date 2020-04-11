@@ -26,7 +26,7 @@ export default new Router({
       component: Contact
     },
     {
-      path: '/info',
+      path: '/info/:artId',
       name: 'Info',
       component: Info
     }
