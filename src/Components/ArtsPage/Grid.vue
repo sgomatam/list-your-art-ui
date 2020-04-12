@@ -19,7 +19,8 @@
 </template>
 
 <script>
-import Art from './Art.vue'
+import Art from './Art.vue';
+import {mapState} from "vuex";
 
 export default {
   name:'Grid',
@@ -37,7 +38,7 @@ export default {
   },
   computed: {
     it(){
-    return this.$store.state.items
+      return this.$store.state.items
     },
     slicedCards(){
       return this.cards.slice(0, this.showCards)

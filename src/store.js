@@ -1,97 +1,28 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-// import createPersistedState from 'vuex-persistedstate';
+import axios from 'axios';
+import VueAxios from 'vue-axios';
 
 Vue.use(Vuex);
+Vue.use(VueAxios, axios);
+
+Vue.axios.defaults.baseURL = "http://listyourart-stage.us-east-2.elasticbeanstalk.com/api/";
 
 export default new Vuex.Store({
   state: {
     infoPage:[],
     cartItems:[],
-    items: [
-      {
-        id: 1,
-        artName: "my first art",
-        authorName: "Srikanth",
-        artURL: "/api/file/IMG_4442.jpg",
-        likes: 0,
-        comments: 0
-      },
-      {
-        id: 2,
-        artName: "my 2nd art",
-        authorName: "Srikanth",
-        artURL: "/api/file/IMG_4296.jpg",
-        likes: 0,
-        comments: 0
-      },
-      {
-        id: 3,
-        artName: "my 3rd art",
-        authorName: "Srikanth",
-        artURL: "/api/file/IMG_4271.jpg",
-        likes: 0,
-        comments: 0
-      },
-      {
-        id: 4,
-        artName: "my 4th art",
-        authorName: "Srikanth",
-        artURL: "/api/file/FullSizeRender14.jpg",
-        likes: 0,
-        comments: 0
-      },
-      {
-        id: 5,
-        artName: "my 5th art",
-        authorName: "Srikanth",
-        artURL: "/api/file/IMG_4252.jpg",
-        likes: 0,
-        comments: 0
-      },
-      {
-        id: 6,
-        artName: "my 6th art",
-        authorName: "Srikanth",
-        artURL: "/api/file/IMG_4167.jpg",
-        likes: 0,
-        comments: 0
-      },
-      {
-        id: 7,
-        artName: "my 7th art",
-        authorName: "Srikanth",
-        artURL: "/api/file/IMG_5142.jpg",
-        likes: 0,
-        comments: 0
-      },
-      {
-        id: 8,
-        artName: "my 8th art",
-        authorName: "Srikanth",
-        artURL: "/api/file/FullSizeRender5.jpg",
-        likes: 0,
-        comments: 0
-      },
-      {
-        id: 9,
-        artName: "my 9th art",
-        authorName: "Srikanth",
-        artURL: "/api/file/IMG_5274_sRGB.jpg",
-        likes: 0,
-        comments: 0
-      },
-      {
-        id: 10,
-        artName: "my 10th art",
-        authorName: "Srikanth",
-        artURL: "/api/file/IMG_5219.jpg",
-        likes: 0,
-        comments: 0
-      }
-    ]
+    items: []
   },
-  // plugins: [createPersistedState()],
+  actions: {
+    fetchArts({commit}) {
+      Vue.axios.get('getAllArts').then(arts => {
+        commit('SAVE_ARTS', arts.data);
+      }).catch(error => {
+        throw new Error(`API ${error}`);
+      });
+    }
+  },
   getters: {
     itemsNumber(state){  // Cart Component
       return state.cartItems.length
@@ -110,6 +41,9 @@ export default new Vuex.Store({
     }
   },
   mutations: {
+    SAVE_ARTS(state, items) {
+      state.items = items;
+    },
     inCart(state, n) { // Cart Component
       return state.cartItems.push(n)
     },

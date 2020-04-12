@@ -15,6 +15,9 @@ export default{
   name: 'app',
   components: {
     Header, Footer
+  },
+  created() {
+    this.$store.dispatch('fetchArts');
   }
 }
 </script>
