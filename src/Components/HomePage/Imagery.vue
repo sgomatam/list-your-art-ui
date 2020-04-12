@@ -1,11 +1,8 @@
 <template>
   <div id="image-container" class="image-stack">
 
-    <img class="top-image img-fluid" src="@/assets/home.jpg" loading="lazy" alt="top homepage image" width="2400" height="1200">
-    <img class="middle-image img-fluid" src="@/assets/home2.jpg" loading="lazy" alt="middle homepage image" width="2400" height="1200">
-    <img class="bottom-image img-fluid" src="@/assets/homeLast.jpg" loading="lazy" alt="bottom homepage image" width="2400" height="1200">
-
-    <div class="pimg1"></div>
+    <img v-if="touchDevice" class="img-fluid" src="@/assets/home.jpg" loading="lazy" alt="first homepage image" width="2400" height="1200">
+    <div v-else class="pimg1"></div>
 
     <section class="section section-light">
       <h2>List It</h2>
@@ -14,7 +11,8 @@
       </p>
     </section>
 
-    <div class="pimg2"></div>
+    <img v-if="touchDevice" class="img-fluid" src="@/assets/home2.jpg" loading="lazy" alt="second homepage image" width="2400" height="1200">
+    <div v-else class="pimg2"></div>
 
     <section class="section section-light">
       <h2>Find It</h2>
@@ -23,7 +21,8 @@
       </p>
     </section>
 
-    <div class="pimg3"></div>
+    <img v-if="touchDevice" class="img-fluid" src="@/assets/home3.jpg" loading="lazy" alt="third homepage image" width="2400" height="1200">
+    <div v-else class="pimg3"></div>
 
     <section class="section section-light">
       <h2>Buy It</h2>
@@ -32,26 +31,29 @@
       </p>
     </section>
 
-    <div class="pimgLast"></div>
+    <img v-if="touchDevice" class="img-fluid" src="@/assets/homeLast.jpg" loading="lazy" alt="last homepage image" width="2400" height="1200">
+    <div v-else class="pimgLast"></div>
+
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Imagery'
+  name: 'Imagery',
+  computed: {
+    touchDevice() {
+      return 'ontouchstart' in document.documentElement;
+    }
+  },
 }
 </script>
 
 <style scoped>
-.top-image, .middle-image {
-  margin-bottom: 5px;
-}
 
-body, html{
+  body, html{
     height:100%;
     margin:0;
     font-size:16px;
-    font-family:"Lato", sans-serif;
     font-weight:400;
     line-height:1.8em;
     color:#666;
