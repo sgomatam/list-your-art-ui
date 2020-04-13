@@ -21,6 +21,7 @@
 <script>
 import Art from './Art.vue';
 import {mapState} from "vuex";
+import axios from "axios"
 
 export default {
   name:'Grid',
@@ -35,6 +36,14 @@ export default {
   },
   created(){
     this.cards = this.it
+
+    /* TODO: Move this to VUEX */
+    axios.get('http://listyourart-stage.us-east-2.elasticbeanstalk.com/api/getAllArts')
+    .then(arts => this.cards = arts.data)
+    .catch(error => {
+      throw new Error(`API ${error}`);
+    });
+    /* End of TODO */
   },
   computed: {
     it(){
@@ -48,7 +57,7 @@ export default {
     incCardNumber() {
       return this.showCards += 6
     }
-  }
+  },
   }
 </script>
 

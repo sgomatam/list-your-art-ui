@@ -16,7 +16,7 @@ export default{
   components: {
     Header, Footer
   },
-  created() {
+  mounted() {
     this.$store.dispatch('fetchArts');
   }
 }

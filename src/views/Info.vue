@@ -19,7 +19,7 @@ import InfoBreadcrumb from '@/Components/InfoPage/InfoBreadcrumb.vue'
 import InfoBox from '@/Components/InfoPage/InfoBox.vue'
 import InfoText from '@/Components/InfoPage/InfoText.vue'
 import Art from '@/Components/ArtsPage/Art.vue'
-
+import axios from "axios"
 
 export default {
   name:'Info',
@@ -35,6 +35,18 @@ export default {
   created(){
     this.information = this.$store.state.items[this.artId]
     this.relatedItems = this.sliceRelatedItems
+
+    /* TODO: Move this to VUEX */
+    axios.get('http://listyourart-stage.us-east-2.elasticbeanstalk.com/api/getAllArts')
+    .then(arts => { 
+      this.$store.state.items = arts.data;
+      this.information = arts.data[this.artId];
+      this.relatedItems = this.sliceRelatedItems;
+    })
+    .catch(error => {
+      throw new Error(`API ${error}`);
+    });
+    /* End of TODO */
   },
   computed: {
     artId() {
