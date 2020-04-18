@@ -1,5 +1,5 @@
 <template >
-  <div class="container py-5" style="padding-top:70px;">
+  <div v-if="information" class="container py-5" style="padding-top:70px;">
 
     <InfoBreadcrumb :information="information"/>
     <InfoBox :information="information"/>
@@ -15,11 +15,13 @@
 </template>
 
 <script>
-import InfoBreadcrumb from '@/Components/InfoPage/InfoBreadcrumb.vue'
-import InfoBox from '@/Components/InfoPage/InfoBox.vue'
-import InfoText from '@/Components/InfoPage/InfoText.vue'
-import Art from '@/Components/ArtsPage/Art.vue'
+import InfoBreadcrumb from '@/components/InfoPage/InfoBreadcrumb.vue'
+import InfoBox from '@/components/InfoPage/InfoBox.vue'
+import InfoText from '@/components/InfoPage/InfoText.vue'
+import Art from '@/components/ArtsPage/Art.vue'
 import axios from "axios"
+
+const API_URL = 'http://listyourart-stage.us-east-2.elasticbeanstalk.com/api/';
 
 export default {
   name:'Info',
@@ -33,19 +35,21 @@ export default {
     }
   },
   created(){
-    this.information = this.$store.state.items[this.artId]
+    this.information = this.$store.state.arts.items[this.artId]
     this.relatedItems = this.sliceRelatedItems
 
     /* TODO: Move this to VUEX */
-    axios.get('http://listyourart-stage.us-east-2.elasticbeanstalk.com/api/getAllArts')
-    .then(arts => { 
-      this.$store.state.items = arts.data;
-      this.information = arts.data[this.artId];
-      this.relatedItems = this.sliceRelatedItems;
-    })
-    .catch(error => {
-      throw new Error(`API ${error}`);
-    });
+    if (!this.information) {
+      axios.get(API_URL + 'getAllArts')
+      .then(arts => { 
+        this.$store.state.arts.items = arts.data;
+        this.information = arts.data[this.artId];
+        this.relatedItems = this.sliceRelatedItems;
+      })
+      .catch(error => {
+        throw new Error(`API ${error}`);
+      });
+    }
     /* End of TODO */
   },
   computed: {
@@ -61,7 +65,7 @@ export default {
         let randomNumber = Math.floor( Math.random() * 10 )
         if(temp.indexOf(randomNumber) === -1) {
           temp.push(randomNumber)
-          artsArray.push(this.$store.state.items[randomNumber])
+          artsArray.push(this.$store.state.arts.items[randomNumber])
         }
       }
       return this.relatedItems = artsArray
@@ -69,7 +73,7 @@ export default {
   },
   watch: {
     '$route.params.artId': function(artId){
-      this.information = this.$store.state.items[this.artId]
+      this.information = this.$store.state.arts.items[this.artId]
     }
   }
 }

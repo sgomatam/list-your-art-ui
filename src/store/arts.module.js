@@ -8,7 +8,8 @@ Vue.use(VueAxios, axios);
 
 Vue.axios.defaults.baseURL = "http://listyourart-stage.us-east-2.elasticbeanstalk.com/api/";
 
-export default new Vuex.Store({
+export const arts = {
+  namespaced: true,
   state: {
     infoPage:[],
     cartItems:[],
@@ -54,5 +55,5 @@ export default new Vuex.Store({
     addtoInfo(state, n) { // Info Component
        return state.infoPage.push(n)
     }
-  },
-})
+  }
+};

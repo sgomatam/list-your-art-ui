@@ -1,5 +1,5 @@
 <template>
-  <footer class="footer">
+  <footer id="footer">
     <div class="container">
       <div class="row justify-content-between">
 
@@ -26,8 +26,8 @@ export default {
 
 <style scoped>
 
-.footer {
-  padding: 30px 10px 20px;
+#footer {
+  padding: 20px 10px 20px;
   position: relative;
   z-index: 1;
   background-color: #dbf0fa;

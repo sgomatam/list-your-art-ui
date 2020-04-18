@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import ContactForm from '@/Components/ContactPage/ContactForm.vue'
+import ContactForm from '@/components/ContactPage/ContactForm.vue'
 export default {
   components: {
     ContactForm

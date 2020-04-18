@@ -47,7 +47,7 @@ export default {
   },
   computed: {
     it(){
-      return this.$store.state.items
+      return this.$store.state.arts.items
     },
     slicedCards(){
       return this.cards.slice(0, this.showCards)

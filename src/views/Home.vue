@@ -7,8 +7,8 @@
 </template>
 
 <script>
-import Imagery from '@/Components/HomePage/Imagery.vue'
-import AboutUs from '@/Components/HomePage/AboutUs.vue'
+import Imagery from '@/components/HomePage/Imagery.vue'
+import AboutUs from '@/components/HomePage/AboutUs.vue'
 
 export default {
   components: {

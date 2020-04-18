@@ -37,7 +37,7 @@ export default {
     },
     addtoCart(it, id) { // Info box Add to cart button
       for (var i = 0; i < this.quan; i++) {
-        this.$store.commit('inCart', it, id)
+        this.$store.commit('arts/inCart', it, id)
       }
     },
   }
