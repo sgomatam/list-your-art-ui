@@ -3,7 +3,7 @@
     <transition-group name="fade" class="row" tag="div">
       <div v-for="item in CardArray" class="col-6 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-xs-6 pb-3" :key="item.id">
           <div class="card">
-            <img class="card-img-top" :src="'http://listyourart-stage.us-east-2.elasticbeanstalk.com'+item.artURL" alt="Card image cap">
+            <img class="card-img-top" :src="'http://lya-api.us-east-2.elasticbeanstalk.com'+item.artURL" alt="Card image cap">
             <div class="overlay">
               <router-link :to="'/Info/'+ item.id"><button type="button" class="btn btn-outline-secondary btn-lg" @click="scrollToTop()">Info</button></router-link>
             </div>

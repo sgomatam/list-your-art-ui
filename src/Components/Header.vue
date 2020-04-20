@@ -23,15 +23,15 @@
       </span>
 
       <p class="navbar-item ml-auto">
-      <div class="searc d-none d-xl-block d-lg-block pr-3">
-        <input type="search" class="search">
-      </div>
 
-      <div v-if="!currentUser" class="user">
-        <router-link to="/login">Log In</router-link>
-      </div>
-      <div v-else class="user" @click.prevent="logOut">
-        <a>Log Out</a>
+      <div class="user">
+        <router-link to="/login">
+          <img
+            id="my-profile-img"
+            src="@/assets/profile.png"
+            class="profile-img-card"
+          />
+        </router-link>
       </div>
     </nav>
     <!--User Modal-->
@@ -45,18 +45,11 @@ export default {
   components: {
   },
   computed: {
-    currentUser() {
-      return this.$store.state.auth.user;
-    },
     bagItemscount() {
       return this.$store.getters.itemsNumber
     }
   },
   methods: {
-    logOut() {
-      this.$store.dispatch('auth/logout');
-      this.$router.push('/login');
-    },
     openCart() {
       this.$refs.cartMove.cartON()
     }
@@ -163,8 +156,13 @@ form .btn-xl.btn-success.mt-3 {
   height: auto;
 }
 
-.user{
-  padding-top: 5px;
+.user img{
+  width: 30px;
+  height: 30px;
+  display: block;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
 }
 
 .user:hover {

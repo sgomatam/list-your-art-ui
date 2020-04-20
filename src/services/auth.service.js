@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://listyourart-stage.us-east-2.elasticbeanstalk.com/api/';
+const API_URL = 'http://lya-api.us-east-2.elasticbeanstalk.com/api/';
 
 class AuthService {
   login(user) {
@@ -23,7 +23,7 @@ class AuthService {
   }
 
   register(user) {
-    return axios.post(API_URL + 'signUp', {
+    return axios.post(API_URL + 'signup', {
       firstName: user.firstName,
       lastName: user.lastName,
       email: user.email,

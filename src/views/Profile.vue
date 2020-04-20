@@ -21,6 +21,10 @@
     <ul>
       <li v-for="(role,index) in currentUser.roles" :key="index">{{role}}</li>
     </ul>
+
+    <div class="user" @click.prevent="logOut">
+      <a>Log Out</a>
+    </div>
   </div>
 </template>
 
@@ -34,6 +38,12 @@ export default {
   },
   mounted() {
     if (!this.currentUser) {
+      this.$router.push('/login');
+    }
+  },
+  methods: {
+    logOut() {
+      this.$store.dispatch('auth/logout');
       this.$router.push('/login');
     }
   }

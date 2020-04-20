@@ -6,7 +6,7 @@ import VueAxios from 'vue-axios';
 Vue.use(Vuex);
 Vue.use(VueAxios, axios);
 
-Vue.axios.defaults.baseURL = "http://listyourart-stage.us-east-2.elasticbeanstalk.com/api/";
+Vue.axios.defaults.baseURL = "http://lya-api.us-east-2.elasticbeanstalk.com/api/";
 
 export const arts = {
   namespaced: true,
@@ -17,7 +17,7 @@ export const arts = {
   },
   actions: {
     fetchArts({commit}) {
-      Vue.axios.get('getAllArts').then(arts => {
+      Vue.axios.get('art/all').then(arts => {
         commit('SAVE_ARTS', arts.data);
       }).catch(error => {
         throw new Error(`API ${error}`);

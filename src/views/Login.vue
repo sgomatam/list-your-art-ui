@@ -3,7 +3,7 @@
     <div class="card card-container">
       <img
         id="profile-img"
-        src="@/assets/login-avatar.png"
+        src="@/assets/profile.png"
         class="profile-img-card"
       />
       <form name="form" @submit.prevent="handleLogin">

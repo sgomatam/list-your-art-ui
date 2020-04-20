@@ -38,7 +38,7 @@ export default {
     this.cards = this.it
 
     /* TODO: Move this to VUEX */
-    axios.get('http://listyourart-stage.us-east-2.elasticbeanstalk.com/api/getAllArts')
+    axios.get('http://lya-api.us-east-2.elasticbeanstalk.com/api/art/all')
     .then(arts => this.cards = arts.data)
     .catch(error => {
       throw new Error(`API ${error}`);
