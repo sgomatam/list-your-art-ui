@@ -21,8 +21,6 @@ import InfoText from '@/components/InfoPage/InfoText.vue'
 import Art from '@/components/ArtsPage/Art.vue'
 import axios from "axios"
 
-const API_URL = 'http://lya-api.us-east-2.elasticbeanstalk.com/api/';
-
 export default {
   name:'Info',
   components: {
@@ -30,6 +28,7 @@ export default {
   },
   data() {
     return {
+      API_HOST: process.env.VUE_APP_API_HOST,
       information: {},
       relatedItems: []
     }
@@ -43,7 +42,7 @@ export default {
 
     /* TODO: Move this to VUEX */
     if (!this.information) {
-      axios.get(API_URL + 'art/all')
+      axios.get(this.API_HOST + '/api/art/all')
       .then(arts => { 
         this.$store.state.arts.items = arts.data;
         this.information = arts.data.find(function(art) {

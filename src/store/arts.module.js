@@ -6,7 +6,7 @@ import VueAxios from 'vue-axios';
 Vue.use(Vuex);
 Vue.use(VueAxios, axios);
 
-Vue.axios.defaults.baseURL = "http://lya-api.us-east-2.elasticbeanstalk.com/api/";
+Vue.axios.defaults.baseURL = process.env.VUE_APP_API_HOST + "/api/";
 
 export const arts = {
   namespaced: true,

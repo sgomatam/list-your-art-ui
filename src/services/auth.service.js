@@ -1,11 +1,11 @@
 import axios from 'axios';
 
-const API_URL = 'http://lya-api.us-east-2.elasticbeanstalk.com/api/';
+const API_URL = process.env.VUE_APP_API_HOST;
 
 class AuthService {
   login(user) {
     return axios
-      .post(API_URL + 'login', {
+      .post(API_URL + '/api/login', {
         username: user.email,
         password: user.password
       })
@@ -23,7 +23,7 @@ class AuthService {
   }
 
   register(user) {
-    return axios.post(API_URL + 'signup', {
+    return axios.post(API_URL + '/api/signup', {
       firstName: user.firstName,
       lastName: user.lastName,
       email: user.email,

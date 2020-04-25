@@ -2,9 +2,8 @@
   <div>
     <div class="row mb-5">
       <div class="col6 col-xl-6 col-lg-6 col-md-12 col-sm-12">
-        <img class="img-fluid" :src="'http://lya-api.us-east-2.elasticbeanstalk.com'+information.artURL">
+        <img class="img-fluid" :src="API_HOST+information.artURL">
       </div>
-
       <div class="col6 col-xl-6 col-lg-6 col-md-12 col-sm-12 d-flex align-items-center justify-content-start">
         <div class="info pt-xl-4 pt-lg-0 pt-5">
           <span class="float-left pr-3">★★★★★</span><h6 style="width:190px;">{{ information.likes }} reviews</h6>
@@ -23,6 +22,7 @@ export default {
   name: 'InfoBox',
   data() {
     return {
+      API_HOST: process.env.VUE_APP_API_HOST,
       quan: 1,
     }
   },
