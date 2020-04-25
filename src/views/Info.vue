@@ -35,7 +35,10 @@ export default {
     }
   },
   created(){
-    this.information = this.$store.state.arts.items[this.artId]
+    let artId = this.artId;
+    this.information = this.$store.state.arts.items.find(function(art) {
+      return art.id == artId
+    })
     this.relatedItems = this.sliceRelatedItems
 
     /* TODO: Move this to VUEX */
@@ -43,7 +46,9 @@ export default {
       axios.get(API_URL + 'art/all')
       .then(arts => { 
         this.$store.state.arts.items = arts.data;
-        this.information = arts.data[this.artId];
+        this.information = arts.data.find(function(art) {
+          return art.id == artId
+        })
         this.relatedItems = this.sliceRelatedItems;
       })
       .catch(error => {
@@ -54,7 +59,7 @@ export default {
   },
   computed: {
     artId() {
-      return this.$route.params.artId - 1
+      return this.$route.params.artId
     },
     sliceRelatedItems(){
       let MAX_NUMBER_RELATED_ITEMS = 4;
@@ -73,7 +78,9 @@ export default {
   },
   watch: {
     '$route.params.artId': function(artId){
-      this.information = this.$store.state.arts.items[this.artId]
+      this.information = this.$store.state.arts.items.find(function(art) {
+        return art.id == artId
+      })
     }
   }
 }

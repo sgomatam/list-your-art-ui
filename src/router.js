@@ -8,7 +8,7 @@ const SignUp = () => import('@/views/SignUp.vue');
 const Contact = () => import('@/views/Contact.vue');
 const Info = () => import('@/views/Info.vue');
 const Profile = () => import('@/views/Profile.vue');
-
+const List = () => import('@/views/List.vue');
 
 Vue.use(Router)
 
@@ -48,6 +48,11 @@ export default new Router({
       path: '/info/:artId',
       name: 'Info',
       component: Info
+    },
+    {
+      path: '/art/list',
+      name: 'Listing',
+      component: List
     },
     { 
       path: '*', 

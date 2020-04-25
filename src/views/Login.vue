@@ -47,7 +47,7 @@
           <router-link to="/signup" class="btn btn-link">Sign Up</router-link>
         </div>
         <div class="form-group">
-          <div v-if="message" class="alert alert-danger" role="alert">{{message}}</div>
+          <div v-if="message" class="alert alert-danger text-center" role="alert">{{message}}</div>
         </div>
       </form>
     </div>
@@ -93,7 +93,7 @@ export default {
             error => {
               this.loading = false;
               this.message =
-                (error.response && error.response.data) ||
+                (error.response && error.response.data && error.response.data.message) ||
                 error.message ||
                 error.toString();
             }
@@ -137,5 +137,9 @@ label {
   -moz-border-radius: 50%;
   -webkit-border-radius: 50%;
   border-radius: 50%;
+}
+
+.card:hover img {
+  filter: blur(4px);
 }
 </style>

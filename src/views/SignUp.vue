@@ -179,4 +179,8 @@ label {
   -webkit-border-radius: 50%;
   border-radius: 50%;
 }
+
+.card:hover img {
+  filter: blur(4px);
+}
 </style>
