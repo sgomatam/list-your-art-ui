@@ -13,6 +13,12 @@ import {mapState} from "vuex";
 export default {
   components: {
     BreadCrumbs, Grid
+  },
+  mounted() {
+    // For Safari
+    document.body.scrollTop = 0; 
+    // For Chrome, Firefox, IE and Opera
+    document.documentElement.scrollTop = 0; 
   }
 }
 </script>

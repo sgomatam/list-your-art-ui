@@ -82,7 +82,7 @@ export default {
   .btn {
     flex: 1 1 auto;
     margin: 10px;
-    padding: 30px;
+    padding: 20px 50px;
     text-align: center;
     text-transform: uppercase;
     transition: 0.5s;
@@ -99,7 +99,7 @@ export default {
   }
 
   .candidates-profile-bg {
-    padding: 180px 0px 80px 0px;
+    padding: 80px 0px 80px 0px;
     background-size: cover;
     position: relative;
     background-position: center center;

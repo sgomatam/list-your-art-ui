@@ -2,16 +2,18 @@
   <div>
     <transition-group name="fade" class="row" tag="div">
       <div v-for="item in CardArray" class="col-6 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-xs-6 pb-3" :key="item.id">
+
           <div class="card">
             <img class="card-img-top" :src="API_HOST+item.artURL" alt="Card image cap">
             <div class="overlay">
-              <router-link :to="'/Info/'+ item.id"><button type="button" class="btn btn-outline-secondary btn-lg" @click="scrollToTop()">Info</button></router-link>
+              <router-link :to="'/Info/'+ item.id"><button type="button" class="btn btn-outline-secondary btn-lg btn-dark text-light" @click="scrollToTop()">Info</button></router-link>
             </div>
             <div class="card-body">
-              <h5 class="card-title">{{ item.artName }}</h5>
-              <p class="card-text">{{ item.authorName }}</p>
+              <h5> <a href="#" class="text-dark">{{ item.artName }}</a></h5>
+                  <p v-if="item.authorName" class="small text-muted font-italic">by: {{ item.authorName }}</p>
             </div>
           </div>
+
       </div>
     </transition-group>
   </div>
@@ -60,7 +62,7 @@ export default {
 }
 
 .card:hover img {
-  filter: blur(4px);
+  filter: blur(2px);
 }
 
 .card:hover .overlay {
@@ -76,14 +78,10 @@ export default {
   align-items: center;
   width: 100%;
   height: 70%;
-  background-color: #232b34;
   opacity: 0;
   z-index: 100;
   transition: all 0.3s ease-in;
 }
 
-.card:hover, .card:active {
-  transform: scaleY(1.0) scaleX(1.00);
-  box-shadow: 0 14px 98px rgba(0, 0, 0, 0.25), 0 0px 60px rgba(0, 0, 0, 0.22);
-}
+
 </style>

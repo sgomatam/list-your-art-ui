@@ -8,7 +8,7 @@ const SignUp = () => import('@/views/SignUp.vue');
 const Contact = () => import('@/views/Contact.vue');
 const Info = () => import('@/views/Info.vue');
 const Profile = () => import('@/views/Profile.vue');
-const List = () => import('@/views/List.vue');
+const ArtListing = () => import('@/views/ArtListing.vue');
 
 Vue.use(Router)
 
@@ -51,8 +51,8 @@ export default new Router({
     },
     {
       path: '/art/list',
-      name: 'Listing',
-      component: List
+      name: 'Art Listing',
+      component: ArtListing
     },
     { 
       path: '*', 
