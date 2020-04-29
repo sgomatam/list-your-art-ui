@@ -1,4 +1,5 @@
 <template>
+
   <div class=" art-listing-container py-5">
 
     <section class="text-white text-center">
@@ -23,6 +24,22 @@
                   <label for="upload" class="btn btn-light m-0 rounded-pill px-4"> <i class="fa fa-cloud-upload mr-2 text-muted"></i><small class="text-uppercase font-weight-bold text-muted">Choose file</small></label>
               </div>
             </div>
+            
+            <div class="content d-none" id="cropper">
+              <section class="cropper-area">
+                <div class="img-cropper">
+                  <vue-cropper
+                    ref="cropper"
+                    :aspect-ratio="16 / 16"
+                    :src="imgSrc"
+                  />
+                </div>
+                <div class="text-center">
+                  <a href="#" class="" role="button" @click.prevent="rotate(90)"> <img src="@/assets/rotate.png" alt="" width="30" class="mb-3 mt-3"> </a>
+                </div>
+                
+              </section>
+            </div>
 
             <div class="input-group mb-3 px-2 py-2 bg-white shadow-sm">
             <input
@@ -36,10 +53,6 @@
             
             <button class="btn btn-block btn-dark "> Upload</button>
 
-            <div class="image-area mt-4 mb-3">
-              <img id="imageResult" src="#" alt="" class="img-fluid rounded shadow-sm mx-auto d-block">
-            </div>
-
             <div class="message">
               <h5>{{message}}</h5>
             </div>
@@ -47,7 +60,7 @@
           </form>
         </div>
     </div>
-</div>
+  </div>
 
 </template>
 
@@ -57,15 +70,22 @@ import axios from 'axios';
 import artListingService from '../services/art-listing'
 import {authHeader} from '../utils/util'
 
+import VueCropper from 'vue-cropperjs';
+import 'cropperjs/dist/cropper.css';
+
 export default {
   name: 'ArtListing',
+  components: {
+    VueCropper,
+  },
   data() {
     return {
       API_HOST: process.env.VUE_APP_API_HOST,
       file:"",
       message:"",
+      imgSrc: '@/assets/art-listing.svg',
       model: {
-        'artName': ''
+        'artName': 'testing image crop'
       }
     }
   },
@@ -84,43 +104,67 @@ export default {
     document.documentElement.scrollTop = 0; 
   },
   methods: {
-    onSelect(event) {
-      const allowedTypes = ["image/jpeg", "image/jpg", "image/png"];
-      const file = this.$refs.file.files[0];
-      this.file = file;
-      if(!allowedTypes.includes(file.type)){
-        this.message = "Make sure the file type matches: JPEG/JPG/PNG"
-      }
-      if(file.size>500000){
-        this.message = 'File is too large, max size 500kb'
+
+    rotate(deg) {
+      this.$refs.cropper.rotate(deg);
+    },
+
+    onSelect(e) {
+      const file = e.target.files[0];
+
+      document.getElementById('cropper').classList.remove('d-none');
+
+      if (file.type.indexOf('image/') === -1) {
+        alert('Please select an image file');
+        return;
       }
 
-      let reader = new FileReader();
-      reader.onload = function (e) {
-          $('#imageResult').attr('src', e.target.result);
-          $('#upload-label').html(file.name);
-      };
-      reader.readAsDataURL(file);
+      if (typeof FileReader === 'function') {
+        const reader = new FileReader();
+
+        reader.onload = (event) => {
+          this.imgSrc = event.target.result;
+          // rebuild cropperjs with the updated source
+          this.$refs.cropper.replace(event.target.result);
+        };
+
+        reader.readAsDataURL(file);
+      } else {
+        alert('Sorry, FileReader API not supported');
+      }
     },
 
     onSubmit() {
-      const formData = new FormData();
-      formData.append('file', this.file);
-      this.model.artName = this.$refs.description.value;
-      formData.append('model', JSON.stringify(this.model));
-      axios
-        .post(this.API_HOST + '/api/art/add', formData, {
-          headers: authHeader()
-        })
-        .then(response => {
-          if (response) {
-            this.$router.push('/arts');
-          }
-        }).catch(err => {
-          console.log(err);
-          this.message = err.response.data.error;
-        });
+      const canvas = this.$refs.cropper.getCroppedCanvas();
+      
+      canvas.toBlob((blob) => {
+        let formData = new FormData();
+
+        // Add name for our image
+        formData.append('name', "image-name-"+(new Date()).getTime());
+
+        // Append image file
+        formData.append('file', blob, 'art.jpeg');
+
+        //this.model.artName = this.$refs.description.value;
+        //formData.append('model', JSON.stringify(this.model));
+        formData.append('model', '{"artName": "testing image crop"}');
+        
+        axios
+          .post(this.API_HOST + '/api/art/add', formData, {
+            headers: authHeader()
+          })
+          .then(response => {
+            if (response) {
+              this.$router.push('/arts');
+            }
+          }).catch(err => {
+            console.log(err);
+            this.message = err.response.data.error;
+          });
+      });
     }
+
   }
 
 }
@@ -171,6 +215,82 @@ export default {
 
 #description {
   width: 100%;
+}
+
+
+
+
+
+
+
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0 5px 0;
+}
+
+.header h2 {
+  margin: 0;
+}
+
+.header a {
+  text-decoration: none;
+  color: black;
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+}
+
+.cropper-area {
+  width: 100%;
+}
+
+.actions {
+  margin-top: 1rem;
+}
+
+.actions a {
+  display: inline-block;
+  padding: 5px 15px;
+  background: #0062CC;
+  color: white;
+  text-decoration: none;
+  border-radius: 3px;
+  margin-right: 1rem;
+  margin-bottom: 1rem;
+}
+
+textarea {
+  width: 100%;
+  height: 100px;
+}
+
+.preview-area {
+  width: 307px;
+}
+
+.preview-area p {
+  font-size: 1.25rem;
+  margin: 0;
+  margin-bottom: 1rem;
+}
+
+.preview-area p:last-of-type {
+  margin-top: 1rem;
+}
+
+.crop-placeholder {
+  width: 100%;
+  height: 200px;
+  background: #ccc;
+}
+
+.cropped-image img {
+  max-width: 100%;
 }
 
 </style>

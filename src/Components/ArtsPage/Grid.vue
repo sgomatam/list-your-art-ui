@@ -28,7 +28,7 @@ export default {
     return {
       API_HOST: process.env.VUE_APP_API_HOST,
       cards: [],
-      showCards: 6
+      showCards: 8
     }
   },
   created(){
@@ -52,7 +52,7 @@ export default {
   },
   methods: {
     incCardNumber() {
-      return this.showCards += 6
+      return this.showCards += 4
     }
   },
   }
