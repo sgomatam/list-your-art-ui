@@ -83,9 +83,9 @@ export default {
       API_HOST: process.env.VUE_APP_API_HOST,
       file:"",
       message:"",
-      imgSrc: '@/assets/art-listing.svg',
+      imgSrc: 'img/art-listing.svg',
       model: {
-        'artName': 'testing image crop'
+        'artName': 'Priceless pieces of art'
       }
     }
   },
@@ -136,6 +136,10 @@ export default {
 
     onSubmit() {
       const canvas = this.$refs.cropper.getCroppedCanvas();
+
+      this.model.artName = this.$refs.description.value;
+
+      let that = this; 
       
       canvas.toBlob((blob) => {
         let formData = new FormData();
@@ -146,14 +150,12 @@ export default {
         // Append image file
         formData.append('file', blob, 'art.jpeg');
 
-        //this.model.artName = this.$refs.description.value;
-        //formData.append('model', JSON.stringify(this.model));
-        formData.append('model', '{"artName": "testing image crop"}');
+        formData.append('model', JSON.stringify(that.model));
         
         axios
           .post(this.API_HOST + '/api/art/add', formData, {
-            headers: authHeader()
-          })
+             headers: authHeader()
+           })
           .then(response => {
             if (response) {
               this.$router.push('/arts');
@@ -189,40 +191,9 @@ export default {
     transform: translateY(-50%);
 }
 
-.image-area {
-    border: 2px dashed rgba(255, 255, 255, 0.7);
-    padding: 1rem;
-    position: relative;
-}
-
-.image-area::before {
-    content: 'Uploaded image';
-    color: #fff;
-    font-weight: bold;
-    text-transform: uppercase;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 0.8rem;
-    z-index: 1;
-}
-
-.image-area img {
-    z-index: 2;
-    position: relative;
-}
-
 #description {
   width: 100%;
 }
-
-
-
-
-
-
-
 
 .header {
   display: flex;
