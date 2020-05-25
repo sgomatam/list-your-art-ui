@@ -2,7 +2,7 @@
   <div class="grid">
     <div class="row pb-5 m-1">
       <div v-if="this.cards == 0" class="col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-6">
-        <h4 style="margin-left:9rem;margin-right:9rem">Sorry, we can't find an art with this feature</h4>
+        <h4 class="text-center">Sorry, there are currently no arts listed!</h4>
       </div>
 
       <Art :CardArray="slicedCards" />

@@ -9,6 +9,7 @@ const Contact = () => import('@/views/Contact.vue');
 const Info = () => import('@/views/Info.vue');
 const Profile = () => import('@/views/Profile.vue');
 const ArtListing = () => import('@/views/ArtListing.vue');
+const UpdateProfile = () => import('@/views/UpdateProfile.vue');
 
 Vue.use(Router)
 
@@ -31,13 +32,18 @@ export default new Router({
     },
     { 
       path: '/signup',
-      name: 'Sign Up',
+      name: 'SignUp',
       component: SignUp 
     },
     { 
       path: '/profile',
       name: 'Profile',
       component: Profile 
+    },
+    { 
+      path: '/profile/update',
+      name: 'UpdateProfile',
+      component: UpdateProfile 
     },
     {
       path: '/contact',

@@ -1,5 +1,5 @@
 <template >
-  <div v-if="information" class="m-5 py-5" style="padding-top:70px;">
+  <div v-if="information" class="m-3 pt-3">
 
     <InfoBreadcrumb :information="information"/>
     <InfoBox :information="information"/>

@@ -12,7 +12,7 @@
                       src="@/assets/profile.png"
                       class="profile-img-card img-fluid d-block mx-auto rounded-circle img-thumbnail mb-4"
                     />
-                      <h4 class="text-white candidates-profile-name mb-2">{{currentUser.username}}</h4>
+                      <h4 class="text-white candidates-profile-name mb-2">{{currentUser.firstName}} {{currentUser.lastName}}</h4>
                       <p class="text-white-50 mb-2"><i class="mdi mdi-bank mr-2"></i>Graphic Artist</p>
                       <div class="logout-user euser text-white-50 text-uppercase" @click.prevent="logOut">
                         <a class="">Log Out</a>
@@ -24,8 +24,8 @@
       </div>
     </section>
 
-    <div class="section text-justify text-center">
-      <router-link class="btn btn-gradient" to="/art/list">
+    <div class="m-5 text-justify text-center">
+      <router-link class="btn" to="/art/list">
         List an Art
       </router-link>
     </div>
@@ -87,7 +87,7 @@ export default {
     text-transform: uppercase;
     transition: 0.5s;
     background-size: 200% auto;
-    box-shadow: 0 0 20px #eee;
+    box-shadow: 0 0 20px #585858;
     border-radius: 10px;
   }
   .btn:hover {
@@ -99,7 +99,7 @@ export default {
   }
 
   .candidates-profile-bg {
-    padding: 80px 0px 80px 0px;
+    padding: 50px 0 50px 0;
     background-size: cover;
     position: relative;
     background-position: center center;

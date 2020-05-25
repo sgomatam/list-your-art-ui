@@ -27,16 +27,28 @@ export const auth = {
     },
     register({ commit }, user) {
       return AuthService.register(user).then(
-        response => {
-          commit('registerSuccess');
-          return Promise.resolve(response.data);
+        user => {
+          commit('registerSuccess', user);
+          return Promise.resolve(user);
         },
         error => {
           commit('registerFailure');
           return Promise.reject(error);
         }
       );
-    }
+    },
+    updateProfile({ commit }, formData) {
+      return AuthService.updateProfile(formData).then(
+        user => {
+          commit('updateSuccess', user);
+          return Promise.resolve(user);
+        },
+        error => {
+          commit('updateFailure');
+          return Promise.reject(error);
+        }
+      );
+    },
   },
   mutations: {
     loginSuccess(state, user) {
@@ -51,11 +63,22 @@ export const auth = {
       state.status.loggedIn = false;
       state.user = null;
     },
-    registerSuccess(state) {
-      state.status.loggedIn = false;
+    registerSuccess(state, user) {
+      state.status.loggedIn = true;
+      state.user = user;
     },
     registerFailure(state) {
       state.status.loggedIn = false;
+      state.user = null;
+    },
+    updateSuccess(state, user) {
+      state.status.loggedIn = true;
+      state.user = user;
+    },
+    updateFailure(state) {
+      state.status.loggedIn = true;
+      // Keep the previous state since user us already logged in
+      // state.user = null;
     }
   }
 };

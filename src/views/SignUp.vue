@@ -101,7 +101,7 @@
 import User from '../models/user';
 
 export default {
-  name: 'Sign Up',
+  name: 'SignUp',
   data() {
     return {
       user: new User('', '', '', '', ''),
@@ -115,7 +115,7 @@ export default {
       return this.$store.state.auth.status.loggedIn;
     }
   },
-  mounted() {
+  created() {
     if (this.loggedIn) {
       this.$router.push('/profile');
     }
@@ -128,8 +128,7 @@ export default {
         if (isValid) {
           this.$store.dispatch('auth/register', this.user).then(
             data => {
-              this.message = data.message;
-              this.successful = true;
+              this.$router.push('/profile');
             },
             error => {
               this.message =
