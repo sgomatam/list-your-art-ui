@@ -1,15 +1,9 @@
 <template>
-  <div class="ui stackable grid container">
+  <div class="ui stackable grid">
 
     <div class="eight wide column">
       <div class="ui segment">
         <h2 class="ui dividing text-center mt-3">Edit Profile</h2>
-
-        <Notification
-          :message="notification.message"
-          :type="notification.type"
-          v-if="notification.message"
-        />
 
         <form class="py-4" @submit.prevent="updateProfile">
             <div class="col-lg-12 text-center">
@@ -130,32 +124,26 @@
 
             <hr>
 
-            <div class="form-row mx-4">
+            <div class="form-row mx-4" text-center>
                 <div class="col mb-3">
-                    <h6 class="form-text m-0">Change Password</h6>
-                    <p class="form-text text-muted m-0">Change your current password.</p>
+                    <h6 class="form-text m-0">Enter Your Password</h6>
                 </div>
             </div>
             <div class="form-row mx-4">
                 <div class="form-group col-md-4">
-                    <label for="firstName">Old Password</label>
-                    <input type="password" class="form-control" v-model="currentUser.password" id="oldPassword" placeholder="Old Password">
-                </div>
-                <div class="form-group col-md-4">
-                    <label for="lastName">New Password</label>
-                    <input type="password" class="form-control" v-model="currentUser.newPassword" id="newPassword" placeholder="New Password">
-                </div>
-                <div class="form-group col-md-4">
-                    <label for="emailAddress">Repeat New Password</label>
-                    <input type="password" class="form-control" v-model="currentUser.newPasswordConfirm" id="newPasswordConfirm" placeholder="Repeat New Password">
+                    <input type="password" class="form-control" v-model="currentUser.password" id="oldPassword" placeholder="Password">
                 </div>
             </div>
+
             <div class="text-center">
-                <button class="btn btn-primary text-center">Update profile</button>
+                <button class="btn btn-primary text-center mr-4">Update profile</button>
+                <router-link class="btn btn-primary text-center" to="/profile">Cancel</router-link>
             </div>
 
+            <div class="form-group">
+                <div v-if="message" class="alert alert-danger text-center m-3" role="alert">{{message}}</div>
+            </div>
         </form>
-
       </div>
     </div>
   </div>
@@ -174,10 +162,7 @@
         },
         data () {
             return {
-                notification: {
-                    message: '',
-                    type: ''
-                }
+                message: ''
             }
         },
         beforeRouteEnter (to, from, next) {
@@ -240,8 +225,9 @@
                         return;
                     }
                 
-                    // Add name for our image
+                    // pass the image uploaded if exist, if not, read the existing image
                     that.profilePic && formData.append('file', that.profilePic, that.profilePic.name);
+              
                     // Append image file
                     delete model["accessToken"];
                     delete model["tokenType"];
