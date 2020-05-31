@@ -23,9 +23,9 @@ export function authHeader() {
           Access to XMLHttpRequest at 'http://lya-api.us-east-2.elasticbeanstalk.com/api/art/add' from origin 'http://list-your-art-ui.s3-website.us-east-2.amazonaws.com' 
           has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.
         */
-        //return { Authorization: 'Bearer ' + user.accessToken };
+        return { Authorization: 'Bearer ' + user.accessToken };
 
-        return { Authorization: 'Bearer ' + '' };
+        //return { Authorization: 'Bearer ' + '' };
         //return { Authorization: 'Bearer ' + getCookie('USERID') }; //Enable when cookie is set correctly
     } else {
         return { Authorization: 'Bearer ' + '' };
