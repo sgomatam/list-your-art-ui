@@ -83,11 +83,13 @@ export default {
     }
   },
   mounted() {
+    document.body.scrollTop = 0; 
+    document.documentElement.scrollTop = 0;
     if (!this.currentUser) {
       this.$router.push('/login');
     }
     axios
-      .get(this.API_HOST + '/api/art/all/artist', {
+      .get(this.API_HOST + '/api/art/artist/all', {
           headers: authHeader()
         })
       .then(response => {
