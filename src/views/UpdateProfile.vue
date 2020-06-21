@@ -8,7 +8,9 @@
         <form class="py-4" @submit.prevent="updateProfile">
             <div class="col-lg-12 text-center">
                 <div class="edit-user-details__avatar">
-                    <img src="@/assets/home.jpg" id="profileImage" alt="User Avatar">
+
+                    <img v-if="currentUser.profilePic" :src="API_HOST+currentUser.profilePic" id="profileImage" alt="Profile Picture"/>
+                    <img v-else src="@/assets/home.jpg" id="profileImage" alt="Profile Picture">
                 </div>
 
                 <div class="edit-user-details__avatar ">
@@ -111,13 +113,13 @@
                 <div class="form-group col-md-6">
                     <label for="socialFacebook">Facebook</label>
                     <div class="input-group input-group-seamless">
-                        <input type="text" v-model="currentUser.facebookHandle" placeholder="Facebook" class="form-control" id="socialFacebook">
+                        <input type="text" v-model="currentUser.facebookHandle" placeholder="www.facebook.com/username" class="form-control" id="socialFacebook">
                     </div>
                 </div>
                 <div class="form-group col-md-6">
                     <label for="socialTwitter">Twitter</label>
                     <div class="input-group input-group-seamless">
-                        <input type="text" v-model="currentUser.twitterHandle" placeholder="Twitter" class="form-control" id="socialTwitter">
+                        <input type="text" v-model="currentUser.twitterHandle" placeholder="www.twitter.com/username" class="form-control" id="socialTwitter">
                     </div>
                 </div>
             </div>
@@ -162,6 +164,7 @@
         },
         data () {
             return {
+                API_HOST: process.env.VUE_APP_API_HOST,
                 message: ''
             }
         },

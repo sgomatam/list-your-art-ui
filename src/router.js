@@ -7,6 +7,7 @@ const Login = () => import('@/views/Login.vue');
 const SignUp = () => import('@/views/SignUp.vue');
 const Contact = () => import('@/views/Contact.vue');
 const Info = () => import('@/views/Info.vue');
+const EditArt = () => import('@/views/EditArt.vue');
 const Profile = () => import('@/views/Profile.vue');
 const ArtListing = () => import('@/views/ArtListing.vue');
 const UpdateProfile = () => import('@/views/UpdateProfile.vue');
@@ -54,6 +55,11 @@ export default new Router({
       path: '/info/:artId',
       name: 'Info',
       component: Info
+    },
+    {
+      path: '/edit/:artId',
+      name: 'EditArt',
+      component: EditArt
     },
     {
       path: '/art/list',

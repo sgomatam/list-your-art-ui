@@ -6,10 +6,12 @@
           <div class="card">
             <img class="card-img-top" :src="API_HOST+item.artURL" alt="Card image cap">
             <div class="overlay">
-              <router-link :to="'/Info/'+ item.id"><button type="button" class="btn btn-outline-secondary btn-lg btn-dark text-light" @click="scrollToTop()">Info</button></router-link>
+              <router-link v-if="CanEdit" :to="'/edit/'+ item.id"><button type="button" class="btn btn-outline-secondary btn-lg btn-dark text-light" @click="scrollToTop()">Edit</button></router-link>
+              <router-link v-else :to="'/info/'+ item.id"><button type="button" class="btn btn-outline-secondary btn-lg btn-dark text-light" @click="scrollToTop()">Info</button></router-link>
+
             </div>
             <div class="card-body">
-              <h5> <a href="#" class="text-dark">{{ item.artName }}</a></h5>
+              <h5 class="card-item"> <a href="#" class="text-dark">{{ item.artName }}</a></h5>
                   <p v-if="item.authorName" class="small text-muted font-italic">by: {{ item.authorName }}</p>
             </div>
           </div>
@@ -22,7 +24,7 @@
 
 <script>
 export default {
-  props: ['CardArray'],
+  props: ['CardArray', 'CanEdit'],
   data() {
     return {
       API_HOST: process.env.VUE_APP_API_HOST
@@ -67,7 +69,23 @@ export default {
 
 .card:hover .overlay {
   opacity: 0.8;
+}
 
+.card-body {
+  padding: 0.75rem;
+}
+
+.card-body p {
+  font-size: 12px;
+}
+
+.card-body .card-item {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  font-size: 15px;
 }
 
 .card .overlay {

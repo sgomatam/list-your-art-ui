@@ -15,8 +15,8 @@
                     <p class="text-white-50 mb-2"><i class="mdi mdi-bank mr-2"></i>{{currentUser.tags[0]}}</p>
                   </div>
                   <div class="text-center"> 
-                    <a class="social-icons facebook" :href="currentUser.facebookHandle" />
-                    <a class="social-icons twitter" :href="currentUser.twitterHandle" />
+                    <a class="social-icons facebook" :href="'http://' + currentUser.facebookHandle" />
+                    <a class="social-icons twitter" :href="'http://' + currentUser.twitterHandle" />
                     <a class="social-icons email" :href="'mailto:' + currentUser.email" />
                   </div>
               </div>
@@ -36,14 +36,14 @@
       </div>
     </section>
 
-    <div class="m-4">
+    <div class="mt-4 mb-4">
       <div class="col-lg-12 pt-4 pb-4">
-          <h3 class="text-dark ">Biography</h3>
+          <h3 class="text-dark ">Biography</h3> 
           <p class="text-muted f-14 mb-3">{{currentUser.bio}}</p>
       </div>
 
       <div class="col-lg-12  pt-4 pb-4">
-          <h3 class="text-dark ">Related Categories</h3>
+          <h3 class="text-dark ">Related Categories</h3> 
           <ul id="tags">
             <li v-for="tag in currentUser.tags" :key="tag">
               {{ tag }}
@@ -52,11 +52,9 @@
       </div>
 
       <div class="col-lg-12  pt-4 pb-4">
-          <h3 class="text-dark ">Arts Collection</h3>
+          <h3 class="text-dark ">Arts Collection</h3> 
           <ul id="collection">
-            <li v-for="tag in currentUser.tags" :key="tag">
-              {{ tag }}
-            </li>
+              <Art :CardArray="artsCollection" :CanEdit="true" />
           </ul>
       </div>
 
@@ -67,10 +65,14 @@
 
 <script>
 import axios from 'axios';
-import {authHeader} from '../utils/util'
+import {authHeader} from '../utils/util';
+import Art from '@/components/ArtsPage/Art.vue';
 
 export default {
   name: 'Profile',
+  components: {
+    Art
+  },
   data() {
     return {
       API_HOST: process.env.VUE_APP_API_HOST,
@@ -137,6 +139,7 @@ export default {
     padding: 5px 5px;
     background-color: #ececec;
     margin: 5px;
+    color: #5d5d5d;
   }
 
   .candidates-profile-bg {
@@ -213,6 +216,11 @@ export default {
     display: inline-block;
     height: 30px;
     width: 30px;
+  }
+
+  #collection {
+    padding: 0;
+
   }
 
   .facebook {

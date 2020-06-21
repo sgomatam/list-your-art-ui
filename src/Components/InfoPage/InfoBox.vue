@@ -9,7 +9,7 @@
           <span class="float-left pr-3">★★★★★</span><h6 style="width:190px;">{{ information.likes }} reviews</h6>
           <h1 class="font-weight-bold text-uppercase pt-3">{{ information.artName }}</h1>
           <br>
-          <button class="add-to-cart-button" @click="addtoCart(information, information.id)">ADD TO CART</button>
+          <!-- <button class="add-to-cart-button" @click="addtoCart(information, information.id)">ADD TO CART</button> -->
         </div>
       </div>
     </div>

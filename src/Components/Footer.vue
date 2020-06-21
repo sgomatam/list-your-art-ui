@@ -27,10 +27,12 @@ export default {
 <style scoped>
 
 #footer {
-  padding: 20px 10px 20px;
-  position: relative;
-  z-index: 1;
-  background-color: #dbf0fa;
+  padding: 15px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 3rem; 
+  background-color: #dbdbdc;
 }
 
 </style>
