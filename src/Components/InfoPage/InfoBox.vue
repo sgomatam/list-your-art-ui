@@ -6,10 +6,15 @@
       </div>
       <div class="col6 col-xl-6 col-lg-6 col-md-12 col-sm-12 d-flex align-items-center justify-content-start">
         <div class="info pt-xl-4 pt-lg-0 pt-5">
-          <span class="float-left pr-3">★★★★★</span><h6 style="width:190px;">{{ information.likes }} reviews</h6>
-          <h1 class="font-weight-bold text-uppercase pt-3">{{ information.artName }}</h1>
+          <h2 class="font-weight-bold text-uppercase pt-4">{{ information.artName }}</h2>
+          <span>by: <router-link class="artist-link" :to="'/artist/' + information.artist.id + '/' + information.authorName"> {{information.authorName}} </router-link></span>
+          
+          <div class="mt-4"><span class="float-left pr-3">★★★★★</span><h6 style="width:190px;">{{ information.likes }} reviews</h6></div>
+
+          <h6 class="font-weight-bold text-uppercase pt-4 pb-4">Category: {{ information.artCategory }}</h6>
           <br>
-          <!-- <button class="add-to-cart-button" @click="addtoCart(information, information.id)">ADD TO CART</button> -->
+
+          <a class="add-to-cart-button" :href="'mailto:' + information.email" >CONTACT ARTIST</a>
         </div>
       </div>
     </div>
@@ -25,21 +30,6 @@ export default {
       API_HOST: process.env.VUE_APP_API_HOST,
       quan: 1,
     }
-  },
-  methods:{
-    inc() { // Info box Incrememnt button
-      if (this.quan <= 8 )
-       return this.quan ++
-    },
-    dec() { // Info box Decrememnt button
-      if (this.quan >= 2)
-       return this.quan --
-    },
-    addtoCart(it, id) { // Info box Add to cart button
-      for (var i = 0; i < this.quan; i++) {
-        this.$store.commit('arts/inCart', it, id)
-      }
-    },
   }
 }
 
@@ -80,7 +70,7 @@ export default {
   background-color: #2c3539;
   color: #fff;
   font-size: 15px;
-  padding: 0px 30px;
+  padding: 20px 30px;
   cursor: pointer;
   position: relative;
   top: 0;
@@ -91,6 +81,11 @@ export default {
 }
 .add-to-cart-button:hover, .add-to-cart-button:focus {
   background-color: inherit;
+  color: black;
+}
+
+.artist-link {
+  text-decoration: underline;
   color: black;
 }
 

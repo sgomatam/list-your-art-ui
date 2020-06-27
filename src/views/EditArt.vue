@@ -12,9 +12,6 @@
           <h1 class="font-weight-bold text-uppercase pt-3">{{ information.artName }}</h1>
         </div>
 
-        <div class="info col12 col-sm-12 mb-4 pb-4">
-            Dont like the art listed? <span class="text-center underline" @click="deleteArt(information, information.id)"><u>Delete!</u></span>
-        </div>
         <form class="" @submit.prevent="updateArt(information.id)">
             <div class="form-group col12 col-sm-12">
                 <label for="description">Description</label>
@@ -27,6 +24,18 @@
                 </textarea>
             </div>
 
+            <div class="form-group col12 col-sm-12">
+                <label for="artCategory">Art Category</label>
+                <div class="input-group input-group-seamless">
+                    <input type="text" 
+                      v-model="information.artCategory" 
+                      placeholder="Painting, Photography, etc..." 
+                      class="form-control" 
+                      ref="artCategory"
+                      id="artCategory">
+                </div>
+            </div>
+
             <div class="text-center m-4">
                 <button class="btn update-art justify-content-center mr-4">UPDATE</button>
                 <router-link class="btn primary-btn update-art p-3" to="/profile">CANCEL</router-link>
@@ -35,6 +44,10 @@
 
         <div v-if="message" class="message alert alert-danger text-center m-4">
             <h5 >{{message}}</h5>
+        </div>
+
+        <div class="info col12 col-sm-12 mt-4 pt-4">
+            Dont like the art listed? <span class="text-center underline" @click="deleteArt(information, information.id)"><u>Delete!</u></span>
         </div>
       </div>
     </div>
@@ -116,6 +129,7 @@ export default {
         let model = {};
         
         model.artDescription = this.$refs.artDescription.value;
+        model.artCategory = this.$refs.artCategory.value;
         formData.append('model', JSON.stringify(model));
 
         axios
@@ -128,7 +142,7 @@ export default {
                 }
             }).catch(err => {
                 console.log(err);
-                this.message = err.response.message;
+                this.message = err;
             });
     }
 

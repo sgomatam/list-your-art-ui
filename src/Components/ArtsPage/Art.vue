@@ -6,7 +6,7 @@
           <div class="card">
             <img class="card-img-top" :src="API_HOST+item.artURL" alt="Card image cap">
             <div class="overlay">
-              <router-link v-if="CanEdit" :to="'/edit/'+ item.id"><button type="button" class="btn btn-outline-secondary btn-lg btn-dark text-light" @click="scrollToTop()">Edit</button></router-link>
+              <router-link v-if="CanEdit" :to="'/edit/art/'+ item.id"><button type="button" class="btn btn-outline-secondary btn-lg btn-dark text-light" @click="scrollToTop()">Edit</button></router-link>
               <router-link v-else :to="'/info/'+ item.id"><button type="button" class="btn btn-outline-secondary btn-lg btn-dark text-light" @click="scrollToTop()">Info</button></router-link>
 
             </div>

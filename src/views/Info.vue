@@ -3,9 +3,9 @@
 
     <InfoBreadcrumb :information="information"/>
     <InfoBox :information="information"/>
-    <InfoText />
+    <InfoText :information="information" />
 
-    <div class="related-item">
+    <div class="related-item mt-4 pt-4">
       <hr>
       <h6 class="pb-4">RELATED ARTS</h6>
       <Art :CardArray="relatedItems" />
@@ -65,14 +65,19 @@ export default {
       let artsArray = []
       let temp = []
 
-      while(artsArray.length < MAX_NUMBER_RELATED_ITEMS) {
-        let randomNumber = Math.floor( Math.random() * 10 )
-        if(temp.indexOf(randomNumber) === -1) {
-          temp.push(randomNumber)
-          artsArray.push(this.$store.state.arts.items[randomNumber])
+      if (this.$store.state.arts.items.length > 0) {
+        while(artsArray.length < MAX_NUMBER_RELATED_ITEMS) {
+          let randomNumber = Math.floor( Math.random() * 10 )
+          if(temp.indexOf(randomNumber) === -1) {
+            temp.push(randomNumber)
+            if ( this.$store.state.arts.items[randomNumber] ) {
+              artsArray.push(this.$store.state.arts.items[randomNumber])
+            }
+          }
         }
       }
-      return this.relatedItems = artsArray
+      
+      return this.relatedItems = artsArray;
     }
   },
   watch: {

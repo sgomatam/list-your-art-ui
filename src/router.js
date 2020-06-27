@@ -11,6 +11,7 @@ const EditArt = () => import('@/views/EditArt.vue');
 const Profile = () => import('@/views/Profile.vue');
 const ArtListing = () => import('@/views/ArtListing.vue');
 const UpdateProfile = () => import('@/views/UpdateProfile.vue');
+const ArtistProfile = () => import('@/views/ArtistProfile.vue');
 
 Vue.use(Router)
 
@@ -41,6 +42,11 @@ export default new Router({
       name: 'Profile',
       component: Profile 
     },
+    {
+      path: '/artist/:artistId/:artistName',
+      name: 'Artist Profile',
+      component: ArtistProfile
+    },
     { 
       path: '/profile/update',
       name: 'UpdateProfile',
@@ -57,7 +63,7 @@ export default new Router({
       component: Info
     },
     {
-      path: '/edit/:artId',
+      path: '/edit/art/:artId',
       name: 'EditArt',
       component: EditArt
     },
