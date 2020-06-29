@@ -1,7 +1,7 @@
 <template>
   <div class="ui stackable grid">
 
-    <div class="eight wide column">
+    <div v-if="currentUser" class="eight wide column">
       <div class="ui segment">
         <h2 class="ui dividing text-center mt-3">Edit Profile</h2>
 
@@ -21,7 +21,7 @@
                 </div>
             </div>
 
-            <div class="form-row mx-4 mt-4">
+            <div class="form-row mx-2 mt-4">
                 <div class="col-lg-12">
                     <div class="form-row">
                         <div class="form-group col-md-6">
@@ -86,7 +86,7 @@
                 </div>
             </div>
 
-            <div class="form-row mx-4">
+            <div class="form-row mx-2">
                 <div class="form-group col-md-6">
                     <label for="userBio">Bio</label>
                     <textarea 
@@ -97,19 +97,19 @@
                         class="form-control">
                     </textarea>
                 </div>
-                <div class="form-group col-md-6">
+                <div class="tags form-group col-md-6">
                     <label for="userTags">Categories</label>
                     <input-tag data-role="tagsinput" v-model="currentUser.tags" :limit="10" placeholder="Tag your skills..."></input-tag>
                 </div>
             </div>
             <hr>
-            <div class="form-row mx-4">
+            <div class="form-row mx-2">
                 <div class="col mb-3">
                     <h6 class="form-text m-0">Social</h6>
                     <p class="form-text text-muted m-0">Setup your social profiles info.</p>
                 </div>
             </div>
-            <div class="form-row mx-4">
+            <div class="form-row mx-2">
                 <div class="form-group col-md-6">
                     <label for="socialFacebook">Facebook</label>
                     <div class="input-group input-group-seamless">
@@ -126,12 +126,12 @@
 
             <hr>
 
-            <div class="form-row mx-4" text-center>
+            <div class="form-row mx-2" text-center>
                 <div class="col mb-3">
                     <h6 class="form-text m-0">Enter Your Password</h6>
                 </div>
             </div>
-            <div class="form-row mx-4">
+            <div class="form-row mx-2">
                 <div class="form-group col-md-4">
                     <input type="password" class="form-control" v-model="currentUser.password" id="oldPassword" placeholder="Password">
                 </div>
@@ -263,7 +263,6 @@
 .form-control {
     height: auto;
     padding: .4375rem .75rem;
-    font-size: .8125rem;
     line-height: 1.5;
     color: #495057;
     background-color: #fff;
@@ -408,26 +407,6 @@ i.material-icons {
     font-size: inherit;
     position: relative;
     top: 2px;
-}
-
-.vue-input-tag-wrapper span.input-tag {
-    background-color: #ddd;
-    border-radius: 15px;
-    border: 1px solid #ddd;
-    color: #000000;
-    display: inline-block;
-    font-size: 13px;
-    font-weight: 400;
-    margin-bottom: 4px;
-    margin-right: 4px;
-    padding: 5px;
-}
-
-.vue-input-tag-wrapper .input-tag .remove {
-    cursor: pointer;
-    font-weight: 700;
-    color: #000;
-    margin: 4px;
 }
 
 </style>

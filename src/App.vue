@@ -47,6 +47,24 @@ html,
   min-height: 100vh;
 }
 
+div.vue-input-tag-wrapper input.new-tag {
+     font-size: 16px !important;
+}
+
+div.vue-input-tag-wrapper span.input-tag {
+    background-color:#9cbcf5 !important;
+    border-radius: 5px !important;
+    border: 1px solid #9cbcf5 !important;
+    color: #000000 !important;
+    font-size: 16px !important;
+}
+
+.vue-input-tag-wrapper .input-tag .remove {
+    color: #000 !important;
+    margin-left: 5px;
+    margin-right: 3px;
+}
+
 #content-wrap {
   padding-bottom: 2.5rem;    /* Footer height */
 }

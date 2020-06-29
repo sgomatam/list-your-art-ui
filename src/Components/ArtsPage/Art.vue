@@ -16,6 +16,13 @@
             </div>
           </div>
 
+          <button 
+            @click="toggleLike(item.id)" 
+            class="btn" 
+            style=" width: 25%; background-color: #1b1e21;color: white; border: none;"
+            v-text="Texts">
+          </button>
+
       </div>
     </transition-group>
   </div>
@@ -23,11 +30,16 @@
 </template>
 
 <script>
+import axios from "axios"
+import {authHeader} from '../../utils/util'
+
 export default {
   props: ['CardArray', 'CanEdit'],
   data() {
     return {
-      API_HOST: process.env.VUE_APP_API_HOST
+      API_HOST: process.env.VUE_APP_API_HOST,
+      liked: false,
+      text: ''
     }
   },
   name: 'Art',
@@ -37,7 +49,46 @@ export default {
       document.body.scrollTop = 0; 
       // For Chrome, Firefox, IE and Opera
       document.documentElement.scrollTop = 0; 
+    },
+
+    toggleLike(artId) {
+        if(this.liked) {
+            this.unlikePhoto(artId)
+        } else {
+            this.likePhoto(artId)
+        }
+    },
+
+    likePhoto(artId) {
+        axios.post('/api/like/' + artId, {
+          headers: authHeader()
+        })
+        .then(response=>{
+            this.liked = true;
+            this.text = 'Unlike';
+        })
+        .catch(errors =>{
+            if(errors.response.status === 401){
+              this.$router.push('/login');
+            }
+        })
+    },
+
+    unlikePhoto(artId) {
+        axios.delete('/api/like/' + artId, {
+          headers: authHeader()
+        })
+        .then(response=>{
+            this.liked = false;
+            this.text = 'Like';
+        })
+        .catch(errors =>{
+            if(errors.response.status === 401){
+              this.$router.push('/login');
+            }
+        })
     }
+
   }
 }
 </script>
