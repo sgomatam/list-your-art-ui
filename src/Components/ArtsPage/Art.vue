@@ -1,7 +1,7 @@
 <template>
   <div>
     <transition-group name="fade" class="row" tag="div">
-      <div v-for="item in CardArray" class="col-6 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-xs-6 pb-3" :key="item.id">
+      <div v-for="item in artArray" class="col-6 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-xs-6 pb-3" :key="item.id">
 
           <div class="card">
             <img class="card-img-top" :src="API_HOST+item.artURL" alt="Card image cap">
@@ -12,17 +12,15 @@
             </div>
             <div class="card-body">
               <h5 class="card-item"> <a href="#" class="text-dark">{{ item.artName }}</a></h5>
-                  <p v-if="item.authorName" class="small text-muted font-italic">by: {{ item.authorName }}</p>
+              <p v-if="item.authorName" class="small text-muted font-italic">by: {{ item.authorName }}</p>
+              
+              <div class="like-button-wrapper"> 
+                <button @click="toggleLike(item, $event)" v-bind:class="{'like-button material-icons':true, 'liked':item.liked}">favorite</button>
+                <span class="like-count">{{item.likes}}</span>
+              </div>
+              
             </div>
           </div>
-
-          <button 
-            @click="toggleLike(item.id)" 
-            class="btn" 
-            style=" width: 25%; background-color: #1b1e21;color: white; border: none;"
-            v-text="Texts">
-          </button>
-
       </div>
     </transition-group>
   </div>
@@ -34,7 +32,10 @@ import axios from "axios"
 import {authHeader} from '../../utils/util'
 
 export default {
+  name: 'Art',
+
   props: ['CardArray', 'CanEdit'],
+
   data() {
     return {
       API_HOST: process.env.VUE_APP_API_HOST,
@@ -42,7 +43,32 @@ export default {
       text: ''
     }
   },
-  name: 'Art',
+
+  created(){
+  },
+
+  computed: {
+    currentUser() {
+      return this.$store.state.auth.user;
+    },
+    artArray() {
+      let currentArtist = this.currentUser;
+      if (currentArtist) {
+        this.CardArray.forEach(art => {
+          art.liked = false;
+          if(art.likedByArtist && art.likedByArtist.length > 0) {
+            art.likedByArtist.forEach(artist => {
+              if (artist.email === currentArtist.email) {
+                art.liked = true;
+              }
+            });
+          }
+        });
+      }
+      return this.CardArray;
+    }
+  },
+
   methods: {
     scrollToTop() {
       // For Safari
@@ -51,21 +77,33 @@ export default {
       document.documentElement.scrollTop = 0; 
     },
 
-    toggleLike(artId) {
-        if(this.liked) {
-            this.unlikePhoto(artId)
-        } else {
-            this.likePhoto(artId)
-        }
+    toggleLike(art, event) {
+      if (!this.currentUser) {
+        this.$router.push('/login');
+        return;
+      }
+      if (navigator && navigator.vibrate) {
+        navigator.vibrate(500);
+      }
+      event.target.classList.toggle("liked");
+      let likeCountEle = event.target.nextElementSibling;
+      let count = parseInt(likeCountEle.textContent);
+      if(art.liked) {
+        count = count >= 1 ? count-1 : 0;
+        this.unlikePhoto(art)
+      } else {
+        count++;
+        this.likePhoto(art)
+      }
+      likeCountEle.innerHTML = count.toString();
     },
 
-    likePhoto(artId) {
-        axios.post('/api/like/' + artId, {
+    likePhoto(art) {
+        axios.post('/art/like/' + art.id, '', {
           headers: authHeader()
         })
         .then(response=>{
-            this.liked = true;
-            this.text = 'Unlike';
+            art.liked = true;
         })
         .catch(errors =>{
             if(errors.response.status === 401){
@@ -74,13 +112,12 @@ export default {
         })
     },
 
-    unlikePhoto(artId) {
-        axios.delete('/api/like/' + artId, {
+    unlikePhoto(art) {
+        axios.delete('/art/like/' + art.id, {
           headers: authHeader()
         })
         .then(response=>{
-            this.liked = false;
-            this.text = 'Like';
+            art.liked = false;
         })
         .catch(errors =>{
             if(errors.response.status === 401){
@@ -95,6 +132,35 @@ export default {
 
 <style scoped>
 /* transition Group style */
+.card button.like-button {
+  text-align:center;
+  width: auto;
+  border: none;
+  background: none;
+  margin-bottom: 0;
+  vertical-align: text-bottom;
+}
+
+.card button.like-button:focus {
+  outline: none;
+}
+
+.card button.like-button.liked {
+  color: #e62eac;
+}
+.card button.like-button {
+  color: lightgray;
+}
+
+.like-button-wrapper {
+  text-align: center;
+}
+
+.like-button-wrapper span {
+  vertical-align: super;
+    font-size: 12px;
+}
+
 .fade-move {
   transition: transform 1s;
 }
@@ -123,11 +189,12 @@ export default {
 }
 
 .card-body {
-  padding: 0.75rem;
+  padding: 10px 5px 0 5px;
 }
 
 .card-body p {
   font-size: 12px;
+  margin-bottom: 5px;
 }
 
 .card-body .card-item {
@@ -137,6 +204,7 @@ export default {
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   font-size: 15px;
+  margin-bottom: 5px;
 }
 
 .card .overlay {

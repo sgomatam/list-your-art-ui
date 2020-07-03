@@ -8,11 +8,11 @@
           <div class="row justify-content-center">
               <div class="col-md-6">
                   <div class="candidates-profile-details text-center">
-                    <img v-if="artist.profilePic" :src="API_HOST+artist.profilePic" id="profile-img" class="profile-img-card rounded-circle mb-4"/>
+                    <img v-if="artist.profilePic" :src="API_HOST+artist.profilePic" id="profile-img" class="profile-img-card mb-4"/>
                     <img v-else src="@/assets/profile.png" id="profile-img" class="profile-img-card rounded-circle mb-4" />
                   
                     <h4 class="text-white candidates-profile-name mb-2">{{artist.firstName}} {{artist.lastName}}</h4>
-                    <p class="text-white-50 mb-2"><i class="mdi mdi-bank mr-2"></i>{{artist.tags[0]}}</p>
+                    <p v-if="artist.tags" class="text-white-50 mb-2"><i class="mdi mdi-bank mr-2"></i>{{artist.tags[0]}}</p>
                   </div>
                   <div class="text-center"> 
                     <a class="social-icons facebook" :href="'http://' + artist.facebookHandle" />
@@ -58,7 +58,7 @@ import {authHeader} from '../utils/util';
 import Art from '@/components/ArtsPage/Art.vue';
 
 export default {
-  name: 'Artist Profile',
+  name: 'Artist-Profile',
   components: {
     Art
   },
@@ -66,7 +66,7 @@ export default {
     return {
       API_HOST: process.env.VUE_APP_API_HOST,
       artist: {},
-      artsCollection: {}
+      artsCollection: []
     }
   },
   computed: {
@@ -145,6 +145,7 @@ export default {
   .candidates-profile-details img {
     width: 50%;
     background: transparent;
+    border-radius: 10%!important;
   }
 
   .candidates-profile-details .candidates-profile-name {

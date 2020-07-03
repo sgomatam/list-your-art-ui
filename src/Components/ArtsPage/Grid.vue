@@ -35,11 +35,12 @@ export default {
     this.cards = this.it
 
     /* TODO: Move this to VUEX */
-    axios.get(this.API_HOST + '/api/art/all')
-    .then(arts => this.cards = arts.data)
-    .catch(error => {
-      throw new Error(`API ${error}`);
-    });
+    axios
+      .get(this.API_HOST + '/api/art/all')
+      .then(arts => this.cards = arts.data)
+      .catch(error => {
+        throw new Error(`API ${error}`);
+      });
     /* End of TODO */
   },
   computed: {

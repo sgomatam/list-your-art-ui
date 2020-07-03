@@ -8,7 +8,7 @@
           <div class="row justify-content-center">
               <div class="col-md-6">
                   <div class="candidates-profile-details text-center">
-                    <img v-if="currentUser.profilePic" :src="API_HOST+currentUser.profilePic" id="profile-img" class="profile-img-card rounded-circle mb-4"/>
+                    <img v-if="currentUser.profilePic" :src="API_HOST+currentUser.profilePic" id="profile-img" class="profile-img-card mb-4"/>
                     <img v-else src="@/assets/profile.png" id="profile-img" class="profile-img-card rounded-circle mb-4" />
                   
                     <h4 class="text-white candidates-profile-name mb-2">{{currentUser.firstName}} {{currentUser.lastName}}</h4>
@@ -51,8 +51,8 @@
           </ul>
       </div>
 
-      <div class="col-lg-12  pt-4 pb-4">
-          <h3 class="text-dark ">Arts Collection</h3> 
+      <div v-if="artsCollection" class="col-lg-12  pt-4 pb-4">
+          <h3 class="text-dark ">Art Collection</h3> 
           <ul id="collection">
               <Art :CardArray="artsCollection" :CanEdit="true" />
           </ul>
@@ -76,7 +76,7 @@ export default {
   data() {
     return {
       API_HOST: process.env.VUE_APP_API_HOST,
-      artsCollection: {}
+      artsCollection: []
     }
   },
   computed: {
@@ -161,6 +161,7 @@ export default {
   .candidates-profile-details img {
     width: 50%;
     background: transparent;
+    border-radius: 10%!important;
   }
 
   .candidates-profile-details .candidates-profile-name {

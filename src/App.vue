@@ -19,7 +19,7 @@ export default{
     Header, Footer
   },
   mounted() {
-    this.$store.dispatch('arts/fetchArts');
+    //this.$store.dispatch('arts/fetchArts');
   }
 }
 </script>

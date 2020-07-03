@@ -10,7 +10,7 @@
         <p>{{ information.artDescription }}</p>
       </div>
       <div class="hide" >
-        <p>There are no &#9829; for this art yet</p>
+        <p>There are {{information.likes}} &#9829; for this art</p>
       </div>
       <div class="hide">
         <p>There are no reviews for this art yet</p>
